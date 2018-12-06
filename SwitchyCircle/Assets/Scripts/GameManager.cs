@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour {
@@ -12,7 +11,8 @@ public class GameManager : MonoBehaviour {
     [SerializeField] private GameObject shopUI;
     [SerializeField] private GameObject gamePlayUI;
     [SerializeField] private GameObject gameOverUI;
-
+    [SerializeField] private GameObject dailyGiftUI;
+    
     [SerializeField] private Shake shakeController;
 
     [SerializeField] private HandController     handPrefab;
@@ -49,7 +49,8 @@ public class GameManager : MonoBehaviour {
         Menu,
         Shop,
         GamePlay,
-        GameOver
+        GameOver,
+        DailyGift
 
     }
 
@@ -127,13 +128,18 @@ public class GameManager : MonoBehaviour {
                 gameOverUI.SetActive(newGameState == GameState.GameOver);
 
                 break;
+            case GameState.DailyGift:
 
+                dailyGiftUI.SetActive(newGameState == GameState.DailyGift);
+
+                break;
             default:
 
                 menuUI.SetActive(newGameState == GameState.Menu);
                 shopUI.SetActive(newGameState == GameState.Shop);
                 gamePlayUI.SetActive(newGameState == GameState.GamePlay);
                 gameOverUI.SetActive(newGameState == GameState.GameOver);
+                dailyGiftUI.SetActive(newGameState == GameState.DailyGift);
 
                 break;
 
@@ -279,6 +285,13 @@ public class GameManager : MonoBehaviour {
 
     }
 
+    public void DailyGift()
+    {
+
+        ChangeGameState(GameState.DailyGift);
+
+    }
+
     public void BackButton() {
 
         ChangeGameState(GameState.GameOver);
@@ -331,6 +344,7 @@ public class GameManager : MonoBehaviour {
         }
 
         SaveData();
+        PlayerPrefs.DeleteAll();
 
     }
 

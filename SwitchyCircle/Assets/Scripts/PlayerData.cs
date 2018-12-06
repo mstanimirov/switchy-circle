@@ -16,7 +16,7 @@ public class PlayerData{
         gems = gameInstance.gems;
         highScore = gameInstance.highScore;
         currentHandIndex = gameInstance.currentHandIndex;
-
+        
         unlockedHandIndexes = new List<int>();
 
         for (int i = 0; i < gameInstance.handSkins.Length; i++) {
