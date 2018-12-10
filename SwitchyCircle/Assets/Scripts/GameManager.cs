@@ -9,8 +9,11 @@ public class GameManager : MonoBehaviour {
 
     [SerializeField] private GameObject menuUI;
     [SerializeField] private GameObject shopUI;
+<<<<<<< HEAD
     [SerializeField] private GameObject reviveUI;
     [SerializeField] private GameObject settingsUI;
+=======
+>>>>>>> parent of 139dea2... Update
     [SerializeField] private GameObject gamePlayUI;
     [SerializeField] private GameObject gameOverUI;
     [SerializeField] private GameObject dailyGiftUI;
@@ -55,7 +58,6 @@ public class GameManager : MonoBehaviour {
         Revive,
         GamePlay,
         GameOver,
-        Settings,
         DailyGift
 
     }
@@ -148,8 +150,11 @@ public class GameManager : MonoBehaviour {
 
                 menuUI.SetActive(newGameState == GameState.Menu);
                 shopUI.SetActive(newGameState == GameState.Shop);
+<<<<<<< HEAD
                 reviveUI.SetActive(newGameState == GameState.Revive);
                 settingsUI.SetActive(newGameState == GameState.Settings);
+=======
+>>>>>>> parent of 139dea2... Update
                 gamePlayUI.SetActive(newGameState == GameState.GamePlay);
                 gameOverUI.SetActive(newGameState == GameState.GameOver);
                 dailyGiftUI.SetActive(newGameState == GameState.DailyGift);
@@ -279,6 +284,7 @@ public class GameManager : MonoBehaviour {
 
     }
 
+<<<<<<< HEAD
     public void Settings()
     {
 
@@ -293,6 +299,8 @@ public class GameManager : MonoBehaviour {
 
     }
 
+=======
+>>>>>>> parent of 139dea2... Update
     public void StartGame() {
 
         ResetGame();
