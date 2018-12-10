@@ -34,11 +34,8 @@ public class GameManagerEditor : Editor
 
         EditorGUILayout.PropertyField(serializedObject.FindProperty("menuUI"));
         EditorGUILayout.PropertyField(serializedObject.FindProperty("shopUI"));
-<<<<<<< HEAD
         EditorGUILayout.PropertyField(serializedObject.FindProperty("reviveUI"));
         EditorGUILayout.PropertyField(serializedObject.FindProperty("settingsUI"));
-=======
->>>>>>> parent of 139dea2... Update
         EditorGUILayout.PropertyField(serializedObject.FindProperty("gamePlayUI"));
         EditorGUILayout.PropertyField(serializedObject.FindProperty("gameOverUI"));
         EditorGUILayout.PropertyField(serializedObject.FindProperty("dailyGiftUI"));
