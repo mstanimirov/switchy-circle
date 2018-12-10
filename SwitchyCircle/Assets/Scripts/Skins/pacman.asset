@@ -16,5 +16,5 @@ MonoBehaviour:
     type: 2}
   explosion_blue: {fileID: 1967686073156468, guid: 1ad88356a5efef3488bca0cf1ff78dda,
     type: 2}
-  price: 250
+  price: 500
   isLocked: 1

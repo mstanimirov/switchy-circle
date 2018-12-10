@@ -112,7 +112,7 @@ public class Menu : MonoBehaviour {
 
     public void GetReward() {
 
-        int reward = UnityEngine.Random.Range(35, 50);
+        int reward = UnityEngine.Random.Range(25, 35);
 
         rewardText.text = "+" + reward;
         GameManager.instance.gems += reward;
