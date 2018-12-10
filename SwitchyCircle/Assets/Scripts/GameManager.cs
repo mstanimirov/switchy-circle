@@ -30,6 +30,8 @@ public class GameManager : MonoBehaviour {
     public Hand[]       handSkins;
     public List<Color>  colors = new List<Color>();
 
+    public int setTimesToRevive;
+
     #endregion
 
     #region Properties
@@ -49,6 +51,7 @@ public class GameManager : MonoBehaviour {
 
         Menu,
         Shop,
+        Revive,
         GamePlay,
         GameOver,
         Settings,
@@ -255,7 +258,7 @@ public class GameManager : MonoBehaviour {
 
     public void MainMenu() {
 
-        messageState = 0;
+        messageState = 1;
 
         DestroyHand();
         ChangeGameState(GameState.Menu);
@@ -284,15 +287,26 @@ public class GameManager : MonoBehaviour {
 
     }
 
+    public void Revive()
+    {
+
+        messageState = 0;
+
+        CreateHand();
+        ChangeGameState(GameState.GamePlay);
+
+    }
+
     public void GameOver()
     {
 
         SaveData();
+        DestroyHand();
 
-        DestroyHand();        
         shakeController.StartShake();
+        
         ChangeGameState(GameState.GameOver);
-
+        
     }
 
     public void DailyGift()

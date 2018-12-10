@@ -6,45 +6,43 @@ using UnityEngine.UI;
 
 public class GameOver : MonoBehaviour {
 
-    public GameObject shopButton;
-    public GameObject restartButton;
-    public GameObject facebookButton;
-    public GameObject leaderboardButton;
-
     public GameObject tipsPanel;
-    public GameObject scorePanel;
+    public GameObject revivePanel;
+    public GameObject gameOverPanel;
 
-    public TextMeshProUGUI  highScoreUI;
-    public TextMeshProUGUI  currentScoreUI;
+    public Continue reviveController;
 
-    public List<Color> colors = new List<Color>();
+    public int setTimesToRevive = 3;
+
+    private int timesToRevive = 3;
 
     void Start()
     {
 
+        timesToRevive = setTimesToRevive;
+
         tipsPanel.SetActive(true);
-        scorePanel.SetActive(false);
-        shopButton.SetActive(false);
-        restartButton.SetActive(false);
-        facebookButton.SetActive(false);
-        leaderboardButton.SetActive(false);
-        highScoreUI.text = "";
-        currentScoreUI.text = "";
+        revivePanel.SetActive(false);
+        gameOverPanel.SetActive(false);
 
     }
 
     void OnEnable()
     {
 
-        Image scoreImage = scorePanel.GetComponent<Image>();
+        if (timesToRevive < 1)
+        {
 
-        scoreImage.color = colors[GameManager.instance.handColorIndex];
+            Invoke("ShowRevive", 0.1f);
 
-        Invoke("HideTipsPanel", 1f);
-        Invoke("ShowResetBtn", 1f);
-        Invoke("ShowShopBtn", 1.1f);
-        Invoke("ShowSocialBtn", 1.2f);
-        Invoke("ShowLeaderboardsBtn", 1.2f);
+        }
+        else {
+
+            Invoke("ShowGameOver", 0.1f);
+
+        }
+
+        Invoke("HideTips", 1f);
 
     }
 
@@ -52,49 +50,77 @@ public class GameOver : MonoBehaviour {
     {
 
         tipsPanel.SetActive(true);
-        scorePanel.SetActive(false);
-        shopButton.SetActive(false);
-        restartButton.SetActive(false);
-        facebookButton.SetActive(false);
-        leaderboardButton.SetActive(false);
-        highScoreUI.text = "";
+        revivePanel.SetActive(false);
+        gameOverPanel.SetActive(false);
 
     }
 
-    void HideTipsPanel() {
+    void Update()
+    {
+
+        if (timesToRevive < 1 && reviveController.timerUI.activeInHierarchy) {
+
+            if (reviveController.IsTimerReady()) {
+
+                ShowGameOver();
+                Invoke("HideRevive", 1f);
+
+            }
+
+        }
+
+    }
+
+    void HideTips()
+    {
 
         tipsPanel.SetActive(false);
 
     }
 
-    void ShowResetBtn() {
+    void ShowGameOver() {
 
-        scorePanel.SetActive(true);
-        restartButton.SetActive(true);
-        highScoreUI.text = "BEST: " + GameManager.instance.highScore;
-        currentScoreUI.text = GameManager.instance.score.ToString();
+        timesToRevive -= 1;
+        gameOverPanel.SetActive(true);
 
     }
 
-    void ShowShopBtn()
+    void ShowRevive()
     {
 
-        shopButton.SetActive(true);
+        revivePanel.SetActive(true);
 
     }
 
-    void ShowSocialBtn()
+    void HideGameOver()
     {
 
-        facebookButton.SetActive(true);
+        gameOverPanel.SetActive(false);
 
     }
 
-    void ShowLeaderboardsBtn()
+    void HideRevive()
     {
 
-        leaderboardButton.SetActive(true);
+        timesToRevive = setTimesToRevive;
+        revivePanel.SetActive(false);
 
     }
-    
+
+    public void Revive()
+    {
+        reviveController.SetTimer();
+        timesToRevive = setTimesToRevive;
+
+        GameManager.instance.Revive();
+
+    }
+
+    public void NoThanks() {
+
+        ShowGameOver();
+        Invoke("HideRevive", 1f);
+
+    }
+
 }
