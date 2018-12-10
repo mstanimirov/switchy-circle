@@ -1433,8 +1433,11 @@ MonoBehaviour:
   shopUI: {fileID: 382681084}
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
   reviveUI: {fileID: 61745844}
   settingsUI: {fileID: 1494027002}
+=======
+>>>>>>> parent of 139dea2... Update
 =======
 >>>>>>> parent of 139dea2... Update
 =======
@@ -2421,7 +2424,10 @@ RectTransform:
   - {fileID: 858555702}
   - {fileID: 410074102}
 <<<<<<< HEAD
+<<<<<<< HEAD
   - {fileID: 61745845}
+=======
+>>>>>>> parent of 139dea2... Update
 =======
 >>>>>>> parent of 139dea2... Update
   - {fileID: 287194123}
@@ -2745,7 +2751,11 @@ RectTransform:
   m_Father: {fileID: 496925997}
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
   m_RootOrder: 6
+=======
+  m_RootOrder: 4
+>>>>>>> parent of 139dea2... Update
 =======
   m_RootOrder: 4
 >>>>>>> parent of 139dea2... Update
@@ -4505,6 +4515,7 @@ CanvasRenderer:
   m_CullTransparentMesh: 0
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 --- !u!1 &1065443661
 GameObject:
   m_ObjectHideFlags: 0
@@ -4661,6 +4672,8 @@ CanvasRenderer:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1065443661}
   m_CullTransparentMesh: 0
+=======
+>>>>>>> parent of 139dea2... Update
 =======
 >>>>>>> parent of 139dea2... Update
 =======
@@ -6868,6 +6881,7 @@ Animator:
   m_KeepAnimatorControllerStateOnDisable: 0
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 --- !u!1 &1494027002
 GameObject:
   m_ObjectHideFlags: 0
@@ -7095,6 +7109,8 @@ CanvasRenderer:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1512011439}
   m_CullTransparentMesh: 0
+=======
+>>>>>>> parent of 139dea2... Update
 =======
 >>>>>>> parent of 139dea2... Update
 =======
