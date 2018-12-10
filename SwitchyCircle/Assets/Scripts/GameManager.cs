@@ -9,6 +9,7 @@ public class GameManager : MonoBehaviour {
 
     [SerializeField] private GameObject menuUI;
     [SerializeField] private GameObject shopUI;
+    [SerializeField] private GameObject reviveUI;
     [SerializeField] private GameObject settingsUI;
     [SerializeField] private GameObject gamePlayUI;
     [SerializeField] private GameObject gameOverUI;
@@ -43,12 +44,15 @@ public class GameManager : MonoBehaviour {
     public int highScore;
     public int currentHandIndex;
 
+    public int timeToRevive = 3;
+
     #endregion
 
     public enum GameState {
 
         Menu,
         Shop,
+        Revive,
         GamePlay,
         GameOver,
         Settings,
@@ -135,10 +139,16 @@ public class GameManager : MonoBehaviour {
                 dailyGiftUI.SetActive(newGameState == GameState.DailyGift);
 
                 break;
+            case GameState.Revive:
+
+                reviveUI.SetActive(newGameState == GameState.Revive);
+
+                break;
             default:
 
                 menuUI.SetActive(newGameState == GameState.Menu);
                 shopUI.SetActive(newGameState == GameState.Shop);
+                reviveUI.SetActive(newGameState == GameState.Revive);
                 settingsUI.SetActive(newGameState == GameState.Settings);
                 gamePlayUI.SetActive(newGameState == GameState.GamePlay);
                 gameOverUI.SetActive(newGameState == GameState.GameOver);
@@ -276,6 +286,13 @@ public class GameManager : MonoBehaviour {
 
     }
 
+    public void Revive()
+    {
+
+        ChangeGameState(GameState.Revive);
+
+    }
+
     public void StartGame() {
 
         ResetGame();
@@ -291,6 +308,14 @@ public class GameManager : MonoBehaviour {
 
         DestroyHand();        
         shakeController.StartShake();
+
+        if (timeToRevive-- < 0) {
+
+            ChangeGameState(GameState.Revive);
+            return;
+
+        }
+
         ChangeGameState(GameState.GameOver);
 
     }
