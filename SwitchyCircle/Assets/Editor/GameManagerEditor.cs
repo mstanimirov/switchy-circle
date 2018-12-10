@@ -36,8 +36,11 @@ public class GameManagerEditor : Editor
         EditorGUILayout.PropertyField(serializedObject.FindProperty("shopUI"));
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
         EditorGUILayout.PropertyField(serializedObject.FindProperty("reviveUI"));
         EditorGUILayout.PropertyField(serializedObject.FindProperty("settingsUI"));
+=======
+>>>>>>> parent of 139dea2... Update
 =======
 >>>>>>> parent of 139dea2... Update
 =======
