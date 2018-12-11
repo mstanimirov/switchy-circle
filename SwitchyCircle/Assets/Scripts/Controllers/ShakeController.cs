@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
 
-public class Shake : MonoBehaviour
+public class ShakeController : MonoBehaviour
 {
     // The original position of the object
     public Vector3 objectOrigin;

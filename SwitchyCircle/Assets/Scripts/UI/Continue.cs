@@ -19,8 +19,8 @@ public class Continue : MonoBehaviour {
     void OnEnable()
     {
 
-        Invoke("ShowTimer", 1f);
-        Invoke("ShowReviveBtn", 1.1f);
+        Invoke("ShowTimer", 0.1f);
+        Invoke("ShowReviveBtn", 0.2f);
         Invoke("ShowResetBtn", 3f);
 
     }

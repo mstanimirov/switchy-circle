@@ -48,8 +48,8 @@ public class GameManagerEditor : Editor
     private void DrawPlayerSettings()
     {
         
+        EditorGUILayout.PropertyField(serializedObject.FindProperty("circle"));
         EditorGUILayout.PropertyField(serializedObject.FindProperty("handPrefab"));
-        EditorGUILayout.PropertyField(serializedObject.FindProperty("circlePrefab"));
 
         EditorGUILayout.PropertyField(serializedObject.FindProperty("handSkins"), true);
 

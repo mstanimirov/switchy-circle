@@ -37,13 +37,13 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1300293912781548}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0.2164396, w: 0.97629607}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.35, y: 0.35, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 25}
 --- !u!50 &50468199384846310
 Rigidbody2D:
   serializedVersion: 4
@@ -118,6 +118,7 @@ MonoBehaviour:
   speed: 200
   direction: -1
   sprite: {fileID: 212469599363004508}
+  skin: {fileID: 0}
 --- !u!212 &212469599363004508
 SpriteRenderer:
   m_ObjectHideFlags: 1

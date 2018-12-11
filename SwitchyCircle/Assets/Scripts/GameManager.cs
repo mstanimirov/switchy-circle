@@ -14,7 +14,7 @@ public class GameManager : MonoBehaviour {
     [SerializeField] private GameObject gameOverUI;
     [SerializeField] private GameObject dailyGiftUI;
     
-    [SerializeField] private Shake shakeController;
+    [SerializeField] private ShakeController shakeController;
 
     [SerializeField] private HandController     handPrefab;
     [SerializeField] private CircleController   circlePrefab;
@@ -25,8 +25,9 @@ public class GameManager : MonoBehaviour {
 
     public GameState gameState;
 
-    public HandController hand;
-    
+    public HandController   hand;
+    public CircleController circle;
+
     public Hand[]       handSkins;
     public List<Color>  colors = new List<Color>();
 
@@ -51,7 +52,6 @@ public class GameManager : MonoBehaviour {
 
         Menu,
         Shop,
-        Revive,
         GamePlay,
         GameOver,
         Settings,
@@ -78,6 +78,7 @@ public class GameManager : MonoBehaviour {
     void Start()
     {
 
+        //Init
         LoadData();
         MainMenu();
 
@@ -91,6 +92,7 @@ public class GameManager : MonoBehaviour {
 
         }
 
+        //Gameplay
         if (Input.GetMouseButtonDown(0)) {
 
             if (handColorIndex != handHoverIndex) {
@@ -115,15 +117,7 @@ public class GameManager : MonoBehaviour {
 	}
 
     #endregion
-
-    public void ResetGame()
-    {
-
-        score = 0;
-        messageState = 1;
-
-    }
-
+    
     public void ChangeGameState(GameState newGameState) {
 
         switch (newGameState) {
@@ -152,6 +146,23 @@ public class GameManager : MonoBehaviour {
         }        
 
         gameState = newGameState;
+
+    }
+
+    public void ResetGame()
+    {
+
+        score = 0;
+        messageState = 1;
+
+    }
+
+    public void GetDailyGift(int reward) {
+
+        gems += reward;
+
+        DailyGift();
+        SaveData();
 
     }
 
@@ -265,17 +276,24 @@ public class GameManager : MonoBehaviour {
 
     }
 
-    public void Shop()
-    {
-
-        ChangeGameState(GameState.Shop);
-
-    }
-
     public void Settings()
     {
 
         ChangeGameState(GameState.Settings);
+
+    }
+
+    public void DailyGift()
+    {
+
+        ChangeGameState(GameState.DailyGift);
+
+    }
+
+    public void Shop()
+    {
+
+        ChangeGameState(GameState.Shop);
 
     }
 
@@ -285,17 +303,7 @@ public class GameManager : MonoBehaviour {
         CreateHand();
         ChangeGameState(GameState.GamePlay);
 
-    }
-
-    public void Revive()
-    {
-
-        messageState = 0;
-
-        CreateHand();
-        ChangeGameState(GameState.GamePlay);
-
-    }
+    }    
 
     public void GameOver()
     {
@@ -309,20 +317,19 @@ public class GameManager : MonoBehaviour {
         
     }
 
-    public void DailyGift()
+    public void Revive()
     {
 
-        ChangeGameState(GameState.DailyGift);
+        messageState = 0;
 
-    }
-
-    public void BackButton() {
-
-        ChangeGameState(GameState.GameOver);
+        CreateHand();
+        ChangeGameState(GameState.GamePlay);
 
     }
 
     #endregion
+
+    #region Save System
 
     public void SaveData() {
 
@@ -371,5 +378,7 @@ public class GameManager : MonoBehaviour {
         PlayerPrefs.DeleteAll();
 
     }
+
+    #endregion
 
 }
