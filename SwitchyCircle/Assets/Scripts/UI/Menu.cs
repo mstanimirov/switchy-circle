@@ -115,10 +115,8 @@ public class Menu : MonoBehaviour {
         int reward = UnityEngine.Random.Range(35, 50);
 
         rewardText.text = "+" + reward;
-        GameManager.instance.gems += reward;
 
-        GameManager.instance.ChangeGameState(GameManager.GameState.DailyGift);
-        GameManager.instance.SaveData();
+        GameManager.instance.GetDailyGift(reward);
 
         explosion = Instantiate(explosionPrefab);
 

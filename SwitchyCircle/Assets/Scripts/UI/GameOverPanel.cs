@@ -32,10 +32,10 @@ public class GameOverPanel : MonoBehaviour {
         Image scoreImage = scorePanel.GetComponent<Image>();
         scoreImage.color = colors[GameManager.instance.handColorIndex];
 
-        Invoke("ShowResetBtn", 1f);
-        Invoke("ShowShopBtn", 1.1f);
-        Invoke("ShowSocialBtn", 1.2f);
-        Invoke("ShowLeaderboardsBtn", 1.2f);
+        Invoke("ShowResetBtn", 0.1f);
+        Invoke("ShowShopBtn", 0.2f);
+        Invoke("ShowSocialBtn", 0.3f);
+        Invoke("ShowLeaderboardsBtn", 0.4f);
 
     }
 

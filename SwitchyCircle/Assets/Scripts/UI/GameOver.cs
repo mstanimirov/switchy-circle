@@ -12,7 +12,7 @@ public class GameOver : MonoBehaviour {
 
     public Continue reviveController;
 
-    public int setTimesToRevive = 3;
+    public int setTimesToRevive;
 
     private int timesToRevive = 3;
 
@@ -33,12 +33,12 @@ public class GameOver : MonoBehaviour {
         if (timesToRevive < 1)
         {
 
-            Invoke("ShowRevive", 0.1f);
+            Invoke("ShowRevive", 1f);
 
         }
         else {
 
-            Invoke("ShowGameOver", 0.1f);
+            Invoke("ShowGameOver", 1f);
 
         }
 
@@ -63,7 +63,7 @@ public class GameOver : MonoBehaviour {
             if (reviveController.IsTimerReady()) {
 
                 ShowGameOver();
-                Invoke("HideRevive", 1f);
+                HideRevive();
 
             }
 
@@ -82,6 +82,8 @@ public class GameOver : MonoBehaviour {
 
         timesToRevive -= 1;
         gameOverPanel.SetActive(true);
+
+        Debug.Log(timesToRevive);
 
     }
 
@@ -112,14 +114,16 @@ public class GameOver : MonoBehaviour {
         reviveController.SetTimer();
         timesToRevive = setTimesToRevive;
 
-        GameManager.instance.Revive();
+        //GameManager.instance.Revive();
+
+        NoThanks();
 
     }
 
     public void NoThanks() {
 
         ShowGameOver();
-        Invoke("HideRevive", 1f);
+        HideRevive();
 
     }
 
