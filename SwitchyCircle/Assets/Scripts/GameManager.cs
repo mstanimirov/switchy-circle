@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using UnityEngine.Advertisements;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour {
@@ -46,6 +47,11 @@ public class GameManager : MonoBehaviour {
     public int highScore;
     public int currentHandIndex;
 
+    private int lastSpeed;
+    private int lastDirection;
+
+    private int multiplier;
+
     #endregion
 
     public enum GameState {
@@ -67,12 +73,16 @@ public class GameManager : MonoBehaviour {
         if (instance == null) {
 
             instance = this;
+
+            //Unity ads init
+            Advertisement.Initialize("2962040");
+
             return;
 
         }
 
-        Destroy(gameObject);
-
+        Destroy(gameObject);      
+        
     }
 
     void Start()
@@ -93,6 +103,7 @@ public class GameManager : MonoBehaviour {
         }
 
         //Gameplay
+
         if (Input.GetMouseButtonDown(0)) {
 
             if (handColorIndex != handHoverIndex) {
@@ -117,7 +128,40 @@ public class GameManager : MonoBehaviour {
 	}
 
     #endregion
-    
+
+    public void DisplayAd() {
+
+        Advertisement.Show("video");
+
+    }
+
+    public void RequestRevive() {
+
+        ShowOptions so = new ShowOptions();
+        so.resultCallback = Revive;
+
+        Advertisement.Show("revivevideo", so);
+
+    }
+
+    public void Revive(ShowResult sr)
+    {
+
+        if (sr == ShowResult.Finished) {
+
+            messageState = 0;
+
+            CreateHand();
+
+            hand.Speed = lastSpeed;
+            hand.Direction = lastDirection;
+
+            ChangeGameState(GameState.GamePlay);
+
+        }
+
+    }
+
     public void ChangeGameState(GameState newGameState) {
 
         switch (newGameState) {
@@ -153,7 +197,10 @@ public class GameManager : MonoBehaviour {
     {
 
         score = 0;
+        multiplier = 0;
         messageState = 1;
+
+
 
     }
 
@@ -167,7 +214,7 @@ public class GameManager : MonoBehaviour {
     }
 
     private void UpdateScore() {
-
+        
         score++;
 
         if (score > 0 && score < 3)
@@ -182,7 +229,7 @@ public class GameManager : MonoBehaviour {
 
         }
 
-        if (score % 5 == 0 && hand.Speed <= 350) {
+        if (score % 5 == 0 && hand.Speed < 350) {
 
             hand.Speed += 35;
 
@@ -229,6 +276,9 @@ public class GameManager : MonoBehaviour {
                 newExplosion.transform.rotation = hand.transform.rotation;
 
             }
+
+            lastSpeed = hand.Speed;
+            lastDirection = hand.Direction;
 
             Destroy(hand.gameObject);
 
@@ -315,16 +365,6 @@ public class GameManager : MonoBehaviour {
         
         ChangeGameState(GameState.GameOver);
         
-    }
-
-    public void Revive()
-    {
-
-        messageState = 0;
-
-        CreateHand();
-        ChangeGameState(GameState.GamePlay);
-
     }
 
     #endregion

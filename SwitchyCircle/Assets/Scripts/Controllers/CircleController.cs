@@ -14,7 +14,7 @@ public class CircleController : MonoBehaviour {
     #region Memeber Vars
 
     public int Speed { get { return speed; } set { speed = value; } }
-    public int Direction { get { return direction; } }
+    public int Direction { get { return direction; } set { direction = value; } }
 
     #endregion
 

@@ -12,13 +12,16 @@ public class GameOver : MonoBehaviour {
 
     public Continue reviveController;
 
+    public int setTimesToAd;
     public int setTimesToRevive;
 
-    private int timesToRevive = 3;
+    public int timesToAd = 3;
+    public int timesToRevive = 5;
 
     void Start()
     {
 
+        timesToAd = setTimesToAd;
         timesToRevive = setTimesToRevive;
 
         tipsPanel.SetActive(true);
@@ -30,7 +33,7 @@ public class GameOver : MonoBehaviour {
     void OnEnable()
     {
 
-        if (timesToRevive < 1)
+        if (timesToRevive < 1 && GameManager.instance.score > 9)
         {
 
             Invoke("ShowRevive", 1f);
@@ -80,7 +83,15 @@ public class GameOver : MonoBehaviour {
 
     void ShowGameOver() {
 
+        timesToAd -= 1;
         timesToRevive -= 1;
+
+        if (timesToAd < 1) {
+
+            ShowAd();
+
+        }
+
         gameOverPanel.SetActive(true);
 
         Debug.Log(timesToRevive);
@@ -114,9 +125,17 @@ public class GameOver : MonoBehaviour {
         reviveController.SetTimer();
         timesToRevive = setTimesToRevive;
 
-        //GameManager.instance.Revive();
+        GameManager.instance.RequestRevive();
 
-        NoThanks();
+        //NoThanks();
+
+    }
+
+    public void ShowAd() {
+
+        timesToAd = setTimesToAd;
+
+        GameManager.instance.DisplayAd();
 
     }
 
