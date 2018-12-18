@@ -47,8 +47,10 @@ public class GameManager : MonoBehaviour {
     public int highScore;
     public int currentHandIndex;
 
-    public int timesToAd = 3;
-    public int timesToRevive = 5;
+    private int lastSpeed;
+    private int lastDirection;
+
+    private int multiplier;
 
     #endregion
 
@@ -101,6 +103,7 @@ public class GameManager : MonoBehaviour {
         }
 
         //Gameplay
+
         if (Input.GetMouseButtonDown(0)) {
 
             if (handColorIndex != handHoverIndex) {
@@ -126,21 +129,42 @@ public class GameManager : MonoBehaviour {
 
     #endregion
 
-    public void RequestRevive()
-    {
+    public void DisplayAd() {
+
+        Advertisement.Show("video");
+
+    }
+
+    public void RequestRevive() {
 
         ShowOptions so = new ShowOptions();
         so.resultCallback = Revive;
 
-        DisplayAd("reviveVideo", so);
+        Advertisement.Show("revivevideo", so);
 
     }
 
-    public void ChangeGameState(GameState newGameState)
+    public void Revive(ShowResult sr)
     {
 
-        switch (newGameState)
-        {
+        if (sr == ShowResult.Finished) {
+
+            messageState = 0;
+
+            CreateHand();
+
+            hand.Speed = lastSpeed;
+            hand.Direction = lastDirection;
+
+            ChangeGameState(GameState.GamePlay);
+
+        }
+
+    }
+
+    public void ChangeGameState(GameState newGameState) {
+
+        switch (newGameState) {
 
             case GameState.GameOver:
 
@@ -163,16 +187,24 @@ public class GameManager : MonoBehaviour {
 
                 break;
 
-        }
+        }        
 
         gameState = newGameState;
 
     }
 
-    #region DailyGift
-
-    public void GetDailyGift(int reward)
+    public void ResetGame()
     {
+
+        score = 0;
+        multiplier = 0;
+        messageState = 1;
+
+
+
+    }
+
+    public void GetDailyGift(int reward) {
 
         gems += reward;
 
@@ -181,38 +213,8 @@ public class GameManager : MonoBehaviour {
 
     }
 
-    #endregion
-
-    #region Ad Managment
-
-    public void DisplayAd(string type) {
-
-        Advertisement.Show(type);
-
-    }
-
-    public void DisplayAd(string type, ShowOptions so)
-    {
-
-        Advertisement.Show(type, so);
-
-    }
-
-    #endregion
-
-    #region GamePlay
-
-    public void ResetGame()
-    {
-
-        score = 0;
-        messageState = 1;
-
-    }
-
-    private void UpdateScore()
-    {
-
+    private void UpdateScore() {
+        
         score++;
 
         if (score > 0 && score < 3)
@@ -221,46 +223,25 @@ public class GameManager : MonoBehaviour {
             messageState = 2;
 
         }
-        else
-        {
+        else {
 
             messageState = 0;
 
         }
 
-        if (score % 5 == 0 && hand.Speed < 350)
-        {
+        if (score % 5 == 0 && hand.Speed < 350) {
 
             hand.Speed += 35;
 
         }
 
-        if (score > highScore)
-        {
+        if (score > highScore) {
 
             highScore = score;
 
         }
 
     }
-
-    public void Revive(ShowResult sr)
-    {
-
-        if (sr == ShowResult.Finished)
-        {
-
-            messageState = 0;
-
-            CreateHand();
-
-            ChangeGameState(GameState.GamePlay);
-
-        }
-
-    }
-
-    #endregion
 
     #region Hand Managment
 
@@ -295,6 +276,9 @@ public class GameManager : MonoBehaviour {
                 newExplosion.transform.rotation = hand.transform.rotation;
 
             }
+
+            lastSpeed = hand.Speed;
+            lastDirection = hand.Direction;
 
             Destroy(hand.gameObject);
 
