@@ -12,8 +12,17 @@ public class GameOver : MonoBehaviour {
 
     public Continue reviveController;
 
+    public int setTimesToAd;
+    public int setTimesToRevive;
+
+    public int timesToAd = 3;
+    public int timesToRevive = 5;
+
     void Start()
     {
+
+        timesToAd = setTimesToAd;
+        timesToRevive = setTimesToRevive;
 
         tipsPanel.SetActive(true);
         revivePanel.SetActive(false);
@@ -24,8 +33,19 @@ public class GameOver : MonoBehaviour {
     void OnEnable()
     {
 
-        gameOverPanel.SetActive(true);
-        tipsPanel.SetActive(false);
+        if (timesToRevive < 1 && GameManager.instance.score > 9)
+        {
+
+            Invoke("ShowRevive", 1f);
+
+        }
+        else {
+
+            Invoke("ShowGameOver", 1f);
+
+        }
+
+        Invoke("HideTips", 1f);
 
     }
 
@@ -41,7 +61,16 @@ public class GameOver : MonoBehaviour {
     void Update()
     {
 
-        
+        if (timesToRevive < 1 && reviveController.timerUI.activeInHierarchy) {
+
+            if (reviveController.IsTimerReady()) {
+
+                ShowGameOver();
+                HideRevive();
+
+            }
+
+        }
 
     }
 
@@ -54,7 +83,18 @@ public class GameOver : MonoBehaviour {
 
     void ShowGameOver() {
 
+        timesToAd -= 1;
+        timesToRevive -= 1;
+
+        if (timesToAd < 1) {
+
+            ShowAd();
+
+        }
+
         gameOverPanel.SetActive(true);
+
+        Debug.Log(timesToRevive);
 
     }
 
@@ -75,6 +115,7 @@ public class GameOver : MonoBehaviour {
     void HideRevive()
     {
 
+        timesToRevive = setTimesToRevive;
         revivePanel.SetActive(false);
 
     }
@@ -82,6 +123,7 @@ public class GameOver : MonoBehaviour {
     public void Revive()
     {
         reviveController.SetTimer();
+        timesToRevive = setTimesToRevive;
 
         GameManager.instance.RequestRevive();
 
@@ -91,7 +133,9 @@ public class GameOver : MonoBehaviour {
 
     public void ShowAd() {
 
-        GameManager.instance.DisplayAd("video");
+        timesToAd = setTimesToAd;
+
+        GameManager.instance.DisplayAd();
 
     }
 
