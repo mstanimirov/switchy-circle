@@ -16,32 +16,33 @@ public class Continue : MonoBehaviour {
 
     public ulong timeOpened;
 
+    public bool start = false;
+
     void OnEnable()
     {
 
-        Invoke("ShowTimer", 0.1f);
-        Invoke("ShowReviveBtn", 0.2f);
-        Invoke("ShowResetBtn", 3f);
+        StartCoroutine("ShowButtons");
 
     }
 
-    void OnDisable()
+    IEnumerator ShowButtons()
     {
 
-        timerUI.SetActive(false);
-        reviveButton.SetActive(false);
-        restartButton.SetActive(false);
+        yield return new WaitForSeconds(0.1f);
 
-    }
-
-    void Start()
-    {
+        timeOpened = (ulong)DateTime.Now.Ticks;
+        timerUI.SetActive(true);
 
         SetTimer();
 
-        timerUI.SetActive(false);
-        reviveButton.SetActive(false);
-        restartButton.SetActive(false);
+        yield return new WaitForSeconds(0.1f);
+
+        reviveButton.SetActive(true);
+
+        yield return new WaitForSeconds(1f);
+
+        restartButton.SetActive(true);
+
 
     }
 
@@ -54,6 +55,7 @@ public class Continue : MonoBehaviour {
 
         if (secondsLeft < 0) {
 
+            start = false;
             return true;
 
         }
@@ -72,25 +74,17 @@ public class Continue : MonoBehaviour {
         timer.maxValue = msToWait / 1000.0f;
         timer.value = msToWait / 1000.0f;
 
-    }
-
-    void ShowTimer() {
-
-        timeOpened = (ulong)DateTime.Now.Ticks;
-
-        timerUI.SetActive(true);
+        start = true;
 
     }
 
-    void ShowReviveBtn() {
+    public void Close() {
 
-        reviveButton.SetActive(true);
+        timerUI.SetActive(false);
+        reviveButton.SetActive(false);
+        restartButton.SetActive(false);
 
-    }
-
-    void ShowResetBtn() {
-
-        restartButton.SetActive(true);
+        start = false;
 
     }
 

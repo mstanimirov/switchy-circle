@@ -1,8 +1,5 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using TMPro;
-using UnityEngine;
-using UnityEngine.UI;
+﻿using UnityEngine;
+using System.Collections;
 
 public class GameOver : MonoBehaviour {
 
@@ -10,22 +7,38 @@ public class GameOver : MonoBehaviour {
     public GameObject revivePanel;
     public GameObject gameOverPanel;
 
-    public Continue reviveController;
+    private Continue reviveController;
+    private GameOverPanel gameOverController;
 
-    void Start()
-    {
-
-        tipsPanel.SetActive(true);
-        revivePanel.SetActive(false);
-        gameOverPanel.SetActive(false);
-
-    }
+    public int timesToAd = 3;
+    public int timesToRevive = 5;
 
     void OnEnable()
     {
+        //Reset
+        reviveController = revivePanel.GetComponent<Continue>();
+        gameOverController = gameOverPanel.GetComponent<GameOverPanel>();
 
-        gameOverPanel.SetActive(true);
-        tipsPanel.SetActive(false);
+        reviveController.Close();
+        gameOverController.SetGameOver(false);
+
+        //Show
+
+        timesToAd -= 1;
+        timesToRevive -= 1;
+
+        if (timesToRevive < 0 && GameManager.instance.score >= 10)
+        {
+
+            StartCoroutine("ShowRevive");
+
+        }
+        else {
+
+            StartCoroutine("ShowGameOver");
+
+        }
+
 
     }
 
@@ -41,65 +54,93 @@ public class GameOver : MonoBehaviour {
     void Update()
     {
 
-        
+        if (reviveController.start) {
+
+            if (reviveController.IsTimerReady()) {
+
+                StartCoroutine("ShowGameOver");
+
+            }
+
+        }
 
     }
 
-    void HideTips()
-    {
+    IEnumerator ShowGameOver() {
 
-        tipsPanel.SetActive(false);
+        yield return new WaitForSeconds(1f);
 
-    }
+        if (timesToAd < 0)
+        {
 
-    void ShowGameOver() {
+            GameManager.instance.DisplayAd("video");
+            timesToAd = 3;
+
+        }
 
         gameOverPanel.SetActive(true);
+        
+        tipsPanel.SetActive(false);
+        revivePanel.SetActive(false);
+
+        reviveController.Close();
 
     }
 
-    void ShowRevive()
+    IEnumerator ShowRevive()
     {
+
+        yield return new WaitForSeconds(1f);
 
         revivePanel.SetActive(true);
 
-    }
-
-    void HideGameOver()
-    {
-
+        tipsPanel.SetActive(false);
         gameOverPanel.SetActive(false);
 
     }
 
-    void HideRevive()
+    #region Button Functions
+
+    public void Restart()
     {
 
-        revivePanel.SetActive(false);
+        gameOverController.SetGameOver(false);
+        GameManager.instance.StartGame();
+
+    }
+
+    public void MainMenu()
+    {
+
+        gameOverController.SetGameOver(false);
+        GameManager.instance.MainMenu();
 
     }
 
     public void Revive()
     {
-        reviveController.SetTimer();
 
+        //Show Ad
         GameManager.instance.RequestRevive();
+        timesToAd = 3;
+        timesToRevive = 5;
 
-        //NoThanks();
-
-    }
-
-    public void ShowAd() {
-
-        GameManager.instance.DisplayAd("video");
+        NoThanks();
 
     }
 
-    public void NoThanks() {
+    public void NoThanks()
+    {
 
-        ShowGameOver();
-        HideRevive();
+        gameOverPanel.SetActive(true);
+
+        tipsPanel.SetActive(false);
+        revivePanel.SetActive(false);
+
+        reviveController.Close();
 
     }
+
+    #endregion
 
 }

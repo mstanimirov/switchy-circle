@@ -1,7 +1,8 @@
-﻿using System.Collections.Generic;
-using TMPro;
+﻿using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using System.Collections;
+using System.Collections.Generic;
 
 public class GameOverPanel : MonoBehaviour {
 
@@ -17,37 +18,41 @@ public class GameOverPanel : MonoBehaviour {
 
     public List<Color> colors = new List<Color>();
 
-    void Start()
-    {
-
-        SetGameOver(false);
-        highScoreUI.text = "";
-        currentScoreUI.text = "";
-
-    }
-
     void OnEnable()
     {
 
         Image scoreImage = scorePanel.GetComponent<Image>();
         scoreImage.color = colors[GameManager.instance.handColorIndex];
 
-        ShowResetBtn();
-        ShowShopBtn();
-        ShowSocialBtn();
-        ShowLeaderboardsBtn();
+        StartCoroutine("ShowButtons");
 
     }
 
-    void OnDisable()
-    {
+    IEnumerator ShowButtons() {
 
-        SetGameOver(false);
-        highScoreUI.text = "";
+        yield return new WaitForSeconds(0.1f);
+
+        scorePanel.SetActive(true);
+        restartButton.SetActive(true);
+        highScoreUI.text = "BEST: " + GameManager.instance.highScore;
+        currentScoreUI.text = GameManager.instance.score.ToString();
+
+        yield return new WaitForSeconds(0.1f);
+
+        shopButton.SetActive(true);
+
+        yield return new WaitForSeconds(0.1f);
+
+        facebookButton.SetActive(true);
+
+        yield return new WaitForSeconds(0.1f);
+
+        leaderboardButton.SetActive(true);
+
 
     }
 
-    void SetGameOver(bool state)
+    public void SetGameOver(bool state)
     {
 
         scorePanel.SetActive(state);
@@ -56,37 +61,9 @@ public class GameOverPanel : MonoBehaviour {
         facebookButton.SetActive(state);
         leaderboardButton.SetActive(state);
 
-    }
-
-    void ShowResetBtn()
-    {
-
-        scorePanel.SetActive(true);
-        restartButton.SetActive(true);
-        highScoreUI.text = "BEST: " + GameManager.instance.highScore;
-        currentScoreUI.text = GameManager.instance.score.ToString();
-
-    }
-
-    void ShowShopBtn()
-    {
-
-        shopButton.SetActive(true);
-
-    }
-
-    void ShowSocialBtn()
-    {
-
-        facebookButton.SetActive(true);
-
-    }
-
-    void ShowLeaderboardsBtn()
-    {
-
-        leaderboardButton.SetActive(true);
-
+        if(!state)
+            highScoreUI.text = "";
+            
     }
 
 }
