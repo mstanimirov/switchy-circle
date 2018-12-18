@@ -39,4 +39,5 @@ public class Shop : MonoBehaviour {
         currentGems.text = GameManager.instance.gems.ToString();
 
 	}
+    
 }

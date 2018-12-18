@@ -42,7 +42,7 @@ public class HandController : MonoBehaviour {
 
     }
 
-    void Update () {
+    void FixedUpdate() {
 
         //Rotate the hand
         transform.Rotate(0f, 0f, (speed*direction)*Time.deltaTime);

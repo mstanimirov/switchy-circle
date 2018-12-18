@@ -87,7 +87,7 @@ public class Menu : MonoBehaviour {
 
         giftButton.interactable = false;
 
-        GetReward();
+        ShowReward();
 
     }
 
@@ -110,7 +110,7 @@ public class Menu : MonoBehaviour {
 
     }
 
-    public void GetReward() {
+    public void ShowReward() {
 
         int reward = UnityEngine.Random.Range(35, 50);
 
