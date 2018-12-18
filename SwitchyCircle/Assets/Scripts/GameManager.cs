@@ -47,9 +47,6 @@ public class GameManager : MonoBehaviour {
     public int highScore;
     public int currentHandIndex;
 
-    public int timesToAd = 3;
-    public int timesToRevive = 5;
-
     #endregion
 
     public enum GameState {
@@ -132,7 +129,7 @@ public class GameManager : MonoBehaviour {
         ShowOptions so = new ShowOptions();
         so.resultCallback = Revive;
 
-        DisplayAd("reviveVideo", so);
+        DisplayAd("revivevideo", so);
 
     }
 
@@ -253,7 +250,6 @@ public class GameManager : MonoBehaviour {
             messageState = 0;
 
             CreateHand();
-
             ChangeGameState(GameState.GamePlay);
 
         }

@@ -865,7 +865,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &287194123
 RectTransform:
   m_ObjectHideFlags: 0
@@ -907,11 +907,6 @@ MonoBehaviour:
   tipsPanel: {fileID: 1157364857}
   revivePanel: {fileID: 1573622388}
   gameOverPanel: {fileID: 1980486734}
-  reviveController: {fileID: 1573622390}
-  setTimesToAd: 3
-  setTimesToRevive: 5
-  timesToAd: 3
-  timesToRevive: 3
 --- !u!1 &290165753
 GameObject:
   m_ObjectHideFlags: 0
@@ -964,7 +959,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &301649200
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1319,6 +1314,8 @@ MonoBehaviour:
   gems: 0
   highScore: 0
   currentHandIndex: 0
+  timesToAd: 3
+  timesToRevive: 5
 --- !u!1 &382681084
 GameObject:
   m_ObjectHideFlags: 0
@@ -1424,7 +1421,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &387970517
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1554,7 +1551,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &410074102
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2626,7 +2623,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &547994850
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3491,7 +3488,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &858555702
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4089,7 +4086,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1047705716
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5169,7 +5166,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 381315448}
+      - m_Target: {fileID: 287194126}
         m_MethodName: MainMenu
         m_Mode: 1
         m_Arguments:
@@ -6893,6 +6890,7 @@ MonoBehaviour:
   setMsToWait: 5000
   msToWait: 5
   timeOpened: 0
+  start: 0
 --- !u!222 &1573622391
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -7413,7 +7411,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1840262902
 RectTransform:
   m_ObjectHideFlags: 0
@@ -8802,7 +8800,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2060322681
 RectTransform:
   m_ObjectHideFlags: 0
@@ -8878,8 +8876,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 381315448}
-        m_MethodName: StartGame
+      - m_Target: {fileID: 287194126}
+        m_MethodName: Restart
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
