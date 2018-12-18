@@ -13,13 +13,4 @@ public class Hand : ScriptableObject {
     public int  price;
     public bool isLocked;
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
 }
