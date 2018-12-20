@@ -3,6 +3,9 @@ using UnityEngine.UI;
 
 public class ToggleController : MonoBehaviour
 {
+
+    public string playerPref;
+
     public bool isOn;
 
     public Color onColorBg;
@@ -27,11 +30,11 @@ public class ToggleController : MonoBehaviour
     public float speed;
     static float t = 0.0f;
 
-    private bool switching = false;
-
+    public bool switching = false;
 
     void Awake()
     {
+
         handleTransform = handle.GetComponent<RectTransform>();
         RectTransform handleRect = handle.GetComponent<RectTransform>();
         handleSize = handleRect.sizeDelta.x;
@@ -63,49 +66,59 @@ public class ToggleController : MonoBehaviour
     void Update()
     {
 
-        if (switching)
-        {
-            Toggle(isOn);
-        }
+        
+
     }
 
-    public void DoYourStaff()
+    public void DoYourStaff(bool switching)
     {
+
+        PlayerPrefs.SetInt(playerPref, switching ? 0 : 1);
+
         Debug.Log(isOn);
+
     }
 
     public void Switching()
     {
+
         switching = true;
+
     }
 
-
-
-    public void Toggle(bool toggleStatus)
+    public void Toggle(bool toggleStatus, string prefs)
     {
+
+        playerPref = prefs;
+
         if (!onIcon.activeSelf || !offIcon.activeSelf)
         {
+
             onIcon.SetActive(true);
             offIcon.SetActive(true);
+
         }
 
         if (toggleStatus)
         {
+
             toggleBgImage.color = SmoothColor(onColorBg, offColorBg);
             Transparency(onIcon, 1f, 0f);
             Transparency(offIcon, 0f, 1f);
             handleTransform.localPosition = SmoothMove(handle, onPosX, offPosX);
+
         }
         else
         {
+
             toggleBgImage.color = SmoothColor(offColorBg, onColorBg);
             Transparency(onIcon, 0f, 1f);
             Transparency(offIcon, 1f, 0f);
             handleTransform.localPosition = SmoothMove(handle, offPosX, onPosX);
+
         }
 
     }
-
 
     Vector3 SmoothMove(GameObject toggleHandle, float startPosX, float endPosX)
     {
@@ -113,27 +126,34 @@ public class ToggleController : MonoBehaviour
         Vector3 position = new Vector3(Mathf.Lerp(startPosX, endPosX, t += speed * Time.deltaTime), 0f, 0f);
         StopSwitching();
         return position;
+
     }
 
     Color SmoothColor(Color startCol, Color endCol)
     {
+
         Color resultCol;
         resultCol = Color.Lerp(startCol, endCol, t += speed * Time.deltaTime);
         return resultCol;
+
     }
 
     CanvasGroup Transparency(GameObject alphaObj, float startAlpha, float endAlpha)
     {
+
         CanvasGroup alphaVal;
         alphaVal = alphaObj.gameObject.GetComponent<CanvasGroup>();
         alphaVal.alpha = Mathf.Lerp(startAlpha, endAlpha, t += speed * Time.deltaTime);
         return alphaVal;
+
     }
 
     void StopSwitching()
     {
+
         if (t > 1.0f)
         {
+
             switching = false;
 
             t = 0.0f;
@@ -141,16 +161,17 @@ public class ToggleController : MonoBehaviour
             {
                 case true:
                     isOn = false;
-                    DoYourStaff();
+                    DoYourStaff(isOn);
                     break;
 
                 case false:
                     isOn = true;
-                    DoYourStaff();
+                    DoYourStaff(isOn);
                     break;
             }
 
         }
+
     }
 
 }
