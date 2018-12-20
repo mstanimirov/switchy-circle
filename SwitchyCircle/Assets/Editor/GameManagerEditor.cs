@@ -32,6 +32,8 @@ public class GameManagerEditor : Editor
 
     private void DrawGeneralSettings() {
 
+        EditorGUILayout.PropertyField(serializedObject.FindProperty("audioManager"));
+
         EditorGUILayout.PropertyField(serializedObject.FindProperty("menuUI"));
         EditorGUILayout.PropertyField(serializedObject.FindProperty("shopUI"));
         EditorGUILayout.PropertyField(serializedObject.FindProperty("settingsUI"));

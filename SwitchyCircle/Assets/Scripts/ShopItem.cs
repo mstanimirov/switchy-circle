@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class ShopItem : MonoBehaviour {
-    
+
     [SerializeField] private GameObject      locked;
     [SerializeField] private GameObject      unlocked;
     [SerializeField] private TextMeshProUGUI price;
@@ -41,6 +41,8 @@ public class ShopItem : MonoBehaviour {
     public void SelectBall() {
 
         Hand handInfo = GameManager.instance.handSkins[currentPlayerIndex];
+
+        GameManager.instance.audioManager.PlaySound("click");
 
         if (handInfo.isLocked)
         {

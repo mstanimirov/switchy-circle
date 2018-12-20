@@ -6,6 +6,8 @@ public class GameManager : MonoBehaviour {
 
     public static GameManager instance;
 
+    public AudioManager audioManager;
+
     #region Inspector Variables
 
     [SerializeField] private GameObject menuUI;
@@ -110,6 +112,8 @@ public class GameManager : MonoBehaviour {
                 return;
 
             }
+
+            audioManager.PlaySound("success");
 
             UpdateScore();
             HandState(true, true);
@@ -351,6 +355,12 @@ public class GameManager : MonoBehaviour {
 
         messageState = 1;
 
+        if (!audioManager.IsSoundPlaying("background")) {
+
+            //audioManager.PlaySound("background");
+
+        }
+
         DestroyHand();
         ChangeGameState(GameState.Menu);
 
@@ -372,12 +382,19 @@ public class GameManager : MonoBehaviour {
 
     public void Shop()
     {
-
+        
         ChangeGameState(GameState.Shop);
 
     }
 
     public void StartGame() {
+
+        if (audioManager.IsSoundPlaying("background"))
+        {
+
+            //audioManager.StopSound("background");
+
+        }
 
         ResetGame();
         CreateHand();
