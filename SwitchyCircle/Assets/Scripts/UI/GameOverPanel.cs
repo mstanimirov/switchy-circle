@@ -34,7 +34,19 @@ public class GameOverPanel : MonoBehaviour {
 
         scorePanel.SetActive(true);
         restartButton.SetActive(true);
-        highScoreUI.text = "BEST: " + GameManager.instance.highScore;
+
+        if (GameManager.instance.score == GameManager.instance.highScore)
+        {
+
+            highScoreUI.text = "NEW BEST!";
+            
+        }
+        else {
+
+            highScoreUI.text = "BEST: " + GameManager.instance.highScore;
+
+        }
+
         currentScoreUI.text = GameManager.instance.score.ToString();
 
         yield return new WaitForSeconds(0.1f);

@@ -17,7 +17,7 @@ public class HandController : MonoBehaviour {
     #region Memeber Vars
 
     public int Speed { get { return speed; } set { speed = value; } }
-    public int Direction { get { return direction; } set { speed = value; } }
+    public int Direction { get { return direction; } set { direction = value; } }
 
     #endregion
 
@@ -34,10 +34,7 @@ public class HandController : MonoBehaviour {
     void Start()
     {
 
-        speed = 200;
-        direction = -1;
         firstTime = true;
-
         sprite.sprite = skin.handSkin;
 
     }

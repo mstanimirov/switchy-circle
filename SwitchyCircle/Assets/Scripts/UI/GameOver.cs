@@ -27,7 +27,7 @@ public class GameOver : MonoBehaviour {
         timesToAd -= 1;
         timesToRevive -= 1;
 
-        if (timesToRevive < 0 && GameManager.instance.score >= 10)
+        if (timesToRevive < 0 && GameManager.instance.score >= 10 && GameManager.instance.IsAdReady())
         {
 
             StartCoroutine("ShowRevive");
@@ -70,7 +70,7 @@ public class GameOver : MonoBehaviour {
 
         yield return new WaitForSeconds(1f);
 
-        if (timesToAd < 0)
+        if (timesToAd < 0 && GameManager.instance.IsAdReady())
         {
 
             GameManager.instance.DisplayAd("video");
@@ -139,6 +139,8 @@ public class GameOver : MonoBehaviour {
 
         reviveController.Close();
 
+        timesToRevive = 5;
+        
     }
 
     #endregion

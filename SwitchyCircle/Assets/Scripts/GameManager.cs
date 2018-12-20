@@ -47,6 +47,9 @@ public class GameManager : MonoBehaviour {
     public int highScore;
     public int currentHandIndex;
 
+    public int handSpeed;
+    public int handDirection;
+
     #endregion
 
     public enum GameState {
@@ -117,6 +120,9 @@ public class GameManager : MonoBehaviour {
 
             }
 
+            handSpeed = hand.Speed;
+            handDirection = hand.Direction;
+
         }
 
 	}
@@ -184,7 +190,7 @@ public class GameManager : MonoBehaviour {
 
     public void DisplayAd(string type) {
 
-        Advertisement.Show(type);
+        Advertisement.Show(type);        
 
     }
 
@@ -192,6 +198,12 @@ public class GameManager : MonoBehaviour {
     {
 
         Advertisement.Show(type, so);
+
+    }
+
+    public bool IsAdReady() {
+
+        return Advertisement.IsReady();
 
     }
 
@@ -204,6 +216,9 @@ public class GameManager : MonoBehaviour {
 
         score = 0;
         messageState = 1;
+
+        handSpeed = 200;
+        handDirection = -1;
 
     }
 
@@ -225,7 +240,7 @@ public class GameManager : MonoBehaviour {
 
         }
 
-        if (score % 5 == 0 && hand.Speed < 350)
+        if (score % 5 == 0 && hand.Speed < 340)
         {
 
             hand.Speed += 35;
@@ -266,6 +281,9 @@ public class GameManager : MonoBehaviour {
 
         hand = Instantiate(handPrefab);
         hand.skin = handSkins[currentHandIndex];
+
+        hand.Speed = handSpeed;
+        hand.Direction = handDirection;
 
         HandState(false, true);
 
