@@ -7,14 +7,13 @@ public class Settings : MonoBehaviour {
     public ToggleController soundSwitch;
     public ToggleController musicSwitch;
     
-	void Awake () {
+	void Start () {
+		
 
-        soundSwitch.Turn(PlayerPrefs.GetInt("sound") == 0 ? true : false);
 
 	}
 
 	void Update () {
-
 
         if (soundSwitch.switching)
         {

@@ -314,7 +314,6 @@ public class GameManager : MonoBehaviour {
 
             }
 
-            audioManager.PlaySound("death");
             Destroy(hand.gameObject);
 
         }
@@ -376,8 +375,6 @@ public class GameManager : MonoBehaviour {
 
     public void DailyGift()
     {
-
-        audioManager.PlaySound("pops");
 
         ChangeGameState(GameState.DailyGift);
 
