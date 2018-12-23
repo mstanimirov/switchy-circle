@@ -159,7 +159,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 161b02f1c4f5312459b1b77b2f95011f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  audioManager: {fileID: 0}
   locked: {fileID: 1106641080715594}
   unlocked: {fileID: 1655278391096824}
   price: {fileID: 114526463082615356}
@@ -444,8 +443,8 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: 340ae2b6119781e4b8b23db46141b915, type: 3}
-  m_Type: 0
+  m_Sprite: {fileID: 21300000, guid: d02f7534c4e9e56438a2e828fb7c5bcf, type: 3}
+  m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
