@@ -44,29 +44,38 @@ public class ToggleController : MonoBehaviour
 
     }
 
+    public void Turn(bool turn) {
 
-    void Start()
-    {
-        if (isOn)
-        {
-            toggleBgImage.color = onColorBg;
-            handleTransform.localPosition = new Vector3(onPosX, 0f, 0f);
-            onIcon.gameObject.SetActive(true);
-            offIcon.gameObject.SetActive(false);
+        if (turn) {
+
+            TurnOn();
+            return;
+
         }
-        else
-        {
-            toggleBgImage.color = offColorBg;
-            handleTransform.localPosition = new Vector3(offPosX, 0f, 0f);
-            onIcon.gameObject.SetActive(false);
-            offIcon.gameObject.SetActive(true);
-        }
+
+        TurnOff();
+
     }
 
-    void Update()
-    {
+    public void TurnOn() {
 
-        
+        toggleBgImage.color = onColorBg;
+        handleTransform.localPosition = new Vector3(onPosX, 0f, 0f);
+        onIcon.gameObject.SetActive(true);
+        offIcon.gameObject.SetActive(false);
+
+        isOn = true;
+
+    }
+
+    public void TurnOff() {
+
+        toggleBgImage.color = offColorBg;
+        handleTransform.localPosition = new Vector3(offPosX, 0f, 0f);
+        onIcon.gameObject.SetActive(false);
+        offIcon.gameObject.SetActive(true);
+
+        isOn = false;
 
     }
 
