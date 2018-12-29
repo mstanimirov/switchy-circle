@@ -39,6 +39,9 @@ public class GameOverPanel : MonoBehaviour {
         {
 
             highScoreUI.text = "NEW BEST!";
+
+            GameManager.instance.ReportScore(GameManager.instance.score);
+
             
         }
         else {

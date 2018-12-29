@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine.Advertisements;
 using UnityEngine;
+using GooglePlayGames;
 
 public class GameManager : MonoBehaviour {
 
@@ -52,6 +53,8 @@ public class GameManager : MonoBehaviour {
     public int handSpeed;
     public int handDirection;
 
+    public int playedGames;
+
     #endregion
 
     public enum GameState {
@@ -76,6 +79,10 @@ public class GameManager : MonoBehaviour {
 
             //Unity ads init
             Advertisement.Initialize("2962040");
+
+            //Google play services
+            PlayGamesPlatform.Activate();
+            OnConnect();
 
             return;
 
@@ -208,6 +215,91 @@ public class GameManager : MonoBehaviour {
     public bool IsAdReady() {
 
         return Advertisement.IsReady();
+
+    }
+
+    #endregion
+
+    #region Play services
+
+    public void OnConnect() {
+
+        Social.localUser.Authenticate((bool success) => {
+
+            OnConnectionResponse(success);
+
+        });
+
+    }
+
+    public void OnConnectionResponse(bool authenticated) {
+
+        if (authenticated)
+        {
+
+            Debug.Log("Success");
+
+        }
+        else {
+
+            Debug.Log("Failed");
+
+        }
+
+    }
+
+    public void ShowLeaderboard() {
+
+        if (Social.localUser.authenticated)
+        {
+
+            Social.ShowLeaderboardUI();
+
+        }
+        else {
+
+            OnConnect();
+
+        }
+
+    }
+
+    public void ShowAchievements()
+    {
+
+        if (Social.localUser.authenticated)
+        {
+
+            Social.ShowAchievementsUI();
+
+        }
+        else
+        {
+
+            OnConnect();
+
+        }
+
+    }
+
+    public void UnlockAchievement(string achievementID) {
+
+        Social.ReportProgress(achievementID, 100.0f, (bool success) => {
+
+            Debug.Log("Unlocked achievment -> " + success.ToString());
+
+        });
+
+    }
+
+    public void ReportScore(int score)
+    {
+
+        Social.ReportScore(score, SCGPS.leaderboard_highscore, (bool success) => {
+
+            Debug.Log("Reported score to leaderboard -> " + success.ToString());
+
+        });
 
     }
 
@@ -399,6 +491,35 @@ public class GameManager : MonoBehaviour {
 
         }
 
+        playedGames++;
+
+        switch (playedGames) {
+
+            case 25:
+
+                UnlockAchievement(SCGPS.achievement_25_games);
+
+                break;
+            case 50:
+
+                UnlockAchievement(SCGPS.achievement_50_games);
+
+                break;
+            case 100:
+
+                UnlockAchievement(SCGPS.achievement_100_games);
+
+                break;
+            case 150:
+
+                UnlockAchievement(SCGPS.achievement_150_games);
+
+                break;
+            default:
+                break;
+
+        }
+
         ResetGame();
         CreateHand();
         ChangeGameState(GameState.GamePlay);
@@ -437,6 +558,8 @@ public class GameManager : MonoBehaviour {
             highScore = data.highScore;
             currentHandIndex = data.currentHandIndex;
 
+            playedGames = data.playedGames;
+
             for (int i = 0; i < data.unlockedHandIndexes.Count; i++) {
 
                 handSkins[data.unlockedHandIndexes[i]].isLocked = false;
@@ -456,6 +579,7 @@ public class GameManager : MonoBehaviour {
         gems = 0;
         highScore = 0;
         currentHandIndex = 0;
+        playedGames = 0;
 
         for (int i = 1; i < handSkins.Length; i++)
         {
@@ -470,5 +594,5 @@ public class GameManager : MonoBehaviour {
     }
 
     #endregion
-
+        
 }
