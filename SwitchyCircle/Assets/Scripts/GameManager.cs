@@ -55,6 +55,9 @@ public class GameManager : MonoBehaviour {
 
     public int playedGames;
 
+    public bool adFree;
+    public bool adFreeRevive;
+
     #endregion
 
     public enum GameState {
@@ -352,6 +355,16 @@ public class GameManager : MonoBehaviour {
 
     }
 
+    public void Revive()
+    {
+
+        messageState = 0;
+
+        CreateHand();
+        ChangeGameState(GameState.GamePlay);
+
+    }
+
     public void Revive(ShowResult sr)
     {
 
@@ -560,6 +573,9 @@ public class GameManager : MonoBehaviour {
 
             playedGames = data.playedGames;
 
+            adFree = data.adFree;
+            adFreeRevive = data.adFreeRevive;
+
             for (int i = 0; i < data.unlockedHandIndexes.Count; i++) {
 
                 handSkins[data.unlockedHandIndexes[i]].isLocked = false;
@@ -580,6 +596,9 @@ public class GameManager : MonoBehaviour {
         highScore = 0;
         currentHandIndex = 0;
         playedGames = 0;
+
+        adFree = false;
+        adFreeRevive = false;
 
         for (int i = 1; i < handSkins.Length; i++)
         {
