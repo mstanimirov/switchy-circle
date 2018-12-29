@@ -25,6 +25,11 @@
 public static class SCGPS
 {
         public const string achievement_100_games = "CgkIvKiKjZ4VEAIQAg"; // <GPGSID>
+        public const string achievement_50_games = "CgkIvKiKjZ4VEAIQBA"; // <GPGSID>
+        public const string achievement_150_games = "CgkIvKiKjZ4VEAIQBQ"; // <GPGSID>
+        public const string achievement_5_skins = "CgkIvKiKjZ4VEAIQBg"; // <GPGSID>
+        public const string leaderboard_highscore = "CgkIvKiKjZ4VEAIQBw"; // <GPGSID>
+        public const string achievement_25_games = "CgkIvKiKjZ4VEAIQAw"; // <GPGSID>
 
 }
 

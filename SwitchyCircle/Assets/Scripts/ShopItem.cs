@@ -57,6 +57,14 @@ public class ShopItem : MonoBehaviour {
                 locked.SetActive(handInfo.isLocked);
                 unlocked.SetActive(!handInfo.isLocked);
 
+                PlayerData data = SaveSystem.LoadData();
+
+                if (data.unlockedHandIndexes.Count == 5) {
+
+                    GameManager.instance.UnlockAchievement(SCGPS.achievement_5_skins);
+
+                }
+
             }
             else {
 

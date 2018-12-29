@@ -9,6 +9,8 @@ public class PlayerData{
     public int highScore;
     public int currentHandIndex;
 
+    public int playedGames;
+
     public List<int> unlockedHandIndexes = new List<int>();
 
     public PlayerData(GameManager gameInstance) {
@@ -16,7 +18,9 @@ public class PlayerData{
         gems = gameInstance.gems;
         highScore = gameInstance.highScore;
         currentHandIndex = gameInstance.currentHandIndex;
-        
+
+        playedGames = gameInstance.playedGames;
+
         unlockedHandIndexes = new List<int>();
 
         for (int i = 0; i < gameInstance.handSkins.Length; i++) {
