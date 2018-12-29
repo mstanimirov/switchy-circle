@@ -11,6 +11,9 @@ public class PlayerData{
 
     public int playedGames;
 
+    public bool adFree;
+    public bool adFreeRevive;
+
     public List<int> unlockedHandIndexes = new List<int>();
 
     public PlayerData(GameManager gameInstance) {
@@ -20,6 +23,9 @@ public class PlayerData{
         currentHandIndex = gameInstance.currentHandIndex;
 
         playedGames = gameInstance.playedGames;
+
+        adFree = gameInstance.adFree;
+        adFreeRevive = gameInstance.adFreeRevive;
 
         unlockedHandIndexes = new List<int>();
 

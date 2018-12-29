@@ -23,8 +23,12 @@ public class GameOver : MonoBehaviour {
         gameOverController.SetGameOver(false);
 
         //Show
+        if (!GameManager.instance.adFree) {
 
-        timesToAd -= 1;
+            timesToAd -= 1;
+
+        }
+
         timesToRevive -= 1;
 
         if (timesToRevive < 0 && GameManager.instance.score >= 10 && GameManager.instance.IsAdReady())
@@ -121,7 +125,20 @@ public class GameOver : MonoBehaviour {
     {
 
         //Show Ad
-        GameManager.instance.RequestRevive();
+        if (GameManager.instance.adFreeRevive)
+        {
+
+            //Change timer icon*
+
+            GameManager.instance.Revive();
+
+        }
+        else {
+
+            GameManager.instance.RequestRevive();
+            
+        }
+
         timesToAd = 3;
         timesToRevive = 5;
 
