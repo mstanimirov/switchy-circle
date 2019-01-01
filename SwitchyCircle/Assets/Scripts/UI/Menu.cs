@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -14,9 +16,13 @@ public class Menu : MonoBehaviour {
     public GameObject explosion;
     public GameObject explosionPrefab;
 
+    public GameObject quitUI;
+
     public float msToWait = 5000.0f;
 
     private ulong lastDailyGift;
+
+    private bool isPressed = false;
 
     void Start()
     {
@@ -75,7 +81,43 @@ public class Menu : MonoBehaviour {
 
             }
 
+            if (Input.GetKeyDown("escape")) {
+
+                GameManager.instance.ChangeGameState(GameManager.GameState.Menu);
+
+            }
+
         }
+
+        if (Input.GetKeyDown("escape"))
+        {
+
+            if (isPressed) {
+
+                Debug.Log("Quit");
+                Application.Quit();
+
+            }
+            else
+            {
+
+                quitUI.SetActive(true);
+                isPressed = true;
+
+                StartCoroutine("QuitTimer");
+
+            }
+
+        }
+
+    }
+
+    IEnumerator QuitTimer() {
+
+        yield return new WaitForSeconds(2.0f);
+
+        isPressed = false;
+        quitUI.SetActive(false);
 
     }
 

@@ -68,6 +68,23 @@ public class GameOver : MonoBehaviour {
 
         }
 
+        if (Input.GetKeyDown("escape"))
+        {
+
+            if (gameOverPanel.activeSelf)
+            {
+
+                GameManager.instance.MainMenu();
+
+            }
+            else if(revivePanel.activeSelf){
+
+                NoThanks();
+
+            }
+
+        }
+
     }
 
     IEnumerator ShowGameOver() {
