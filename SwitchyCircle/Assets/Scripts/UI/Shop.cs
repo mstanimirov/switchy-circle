@@ -38,6 +38,13 @@ public class Shop : MonoBehaviour {
 
         currentGems.text = GameManager.instance.gems.ToString();
 
-	}
+        if (Input.GetKeyDown("escape"))
+        {
+            
+            GameManager.instance.MainMenu();
+
+        }
+
+    }
     
 }
