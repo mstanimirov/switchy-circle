@@ -1,4 +1,5 @@
-﻿using System;
+﻿using EasyMobile;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -101,7 +102,7 @@ public class Menu : MonoBehaviour {
             else
             {
 
-                quitUI.SetActive(true);
+                NativeUI.ShowToast("Press again to quit");
                 isPressed = true;
 
                 StartCoroutine("QuitTimer");
@@ -117,7 +118,6 @@ public class Menu : MonoBehaviour {
         yield return new WaitForSeconds(2.0f);
 
         isPressed = false;
-        quitUI.SetActive(false);
 
     }
 

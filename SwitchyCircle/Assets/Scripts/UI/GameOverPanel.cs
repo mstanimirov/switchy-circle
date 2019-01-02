@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
+using EasyMobile;
 
 public class GameOverPanel : MonoBehaviour {
 
@@ -17,6 +18,8 @@ public class GameOverPanel : MonoBehaviour {
     public TextMeshProUGUI currentScoreUI;
 
     public List<Color> colors = new List<Color>();
+
+    private Texture2D shareTexture;
 
     void OnEnable()
     {
@@ -79,6 +82,23 @@ public class GameOverPanel : MonoBehaviour {
         if(!state)
             highScoreUI.text = "";
             
+    }
+
+    public void ShareHighScore() {
+
+        StartCoroutine("CaptureScreenshot");
+
+    }
+
+    IEnumerator CaptureScreenshot()
+    {
+
+        yield return new WaitForEndOfFrame();
+
+        shareTexture = Sharing.CaptureScreenshot();
+
+        Sharing.ShareTexture2D(shareTexture, "screenshot", "Check out my new score on Switchy Circle! Can you beat me? https://play.google.com/store/apps/details?id=com.stanimirov.switchycircle");
+
     }
 
 }
