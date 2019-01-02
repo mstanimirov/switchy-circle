@@ -37,6 +37,8 @@ public class GameManager : MonoBehaviour {
 
     public int setTimesToRevive;
 
+    public string ANDROID_RATE_URL = "market://details?id=com.stanimirov.switchycircle";
+
     #endregion
 
     #region Properties
@@ -549,6 +551,16 @@ public class GameManager : MonoBehaviour {
         
         ChangeGameState(GameState.GameOver);
         
+    }
+
+    public void RateUs() {
+
+        #if UNITY_EDITOR
+        Debug.Log("Opening store...");
+        #elif UNITY_ANDROID
+        Application.OpenURL(ANDROID_RATE_URL);
+        #endif
+
     }
 
     #endregion

@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using EasyMobile;
+using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -68,7 +69,11 @@ public class ShopItem : MonoBehaviour {
             }
             else {
 
+                #if UNITY_EDITOR
                 Debug.Log("Not enough gems!");
+                #elif UNITY_ANDROID
+                NativeUI.ShowToast("Not enough gems!");
+                #endif
 
             }
 
