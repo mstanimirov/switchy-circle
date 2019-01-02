@@ -18,18 +18,6 @@ public class GameOverPanel : MonoBehaviour {
 
     public List<Color> colors = new List<Color>();
 
-    void Update()
-    {
-
-        if (Input.GetKeyDown("escape"))
-        {
-
-            GameManager.instance.GameOver();
-
-        }
-
-    }
-
     void OnEnable()
     {
 
