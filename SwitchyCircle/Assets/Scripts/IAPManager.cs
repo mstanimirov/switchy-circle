@@ -38,7 +38,6 @@ public class IAPManager : MonoBehaviour, IStoreListener
             InitializePurchasing();
 
         }
-
     }
 
     public void InitializePurchasing()
