@@ -1809,6 +1809,7 @@ MonoBehaviour:
   - {r: 0.2627451, g: 0.7607844, b: 0.45098042, a: 1}
   - {r: 0.0627451, g: 0.69411767, b: 0.9803922, a: 1}
   setTimesToRevive: 1
+  ANDROID_RATE_URL: market://details?id=com.stanimirov.switchycircle
   score: 0
   messageState: 0
   handColorIndex: 0
@@ -3146,6 +3147,17 @@ MonoBehaviour:
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: click
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 381315448}
+        m_MethodName: RateUs
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
