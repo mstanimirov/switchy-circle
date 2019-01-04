@@ -7,6 +7,7 @@ public class GamePlay : MonoBehaviour {
 
     public TextMeshProUGUI scoreUI;
     public TextMeshProUGUI gemsUI;
+    public TextMeshProUGUI collectedGemText;
 
     public GameObject collectedGem;
 
@@ -65,6 +66,8 @@ public class GamePlay : MonoBehaviour {
 
             Animator anim = gemsUI.GetComponent<Animator>();
             anim.SetTrigger("TextTrigger");
+                        
+            collectedGemText.text = "+" + (gems - previousGems);
 
             Animator gemAnim = collectedGem.GetComponent<Animator>();
             gemAnim.SetTrigger("Show");
