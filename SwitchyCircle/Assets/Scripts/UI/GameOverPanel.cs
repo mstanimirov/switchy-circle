@@ -38,13 +38,15 @@ public class GameOverPanel : MonoBehaviour {
         scorePanel.SetActive(true);
         restartButton.SetActive(true);
 
-        if (GameManager.instance.score == GameManager.instance.highScore)
+        if (GameManager.instance.score > GameManager.instance.highScore)
         {
 
             highScoreUI.text = "NEW BEST!";
 
+            GameManager.instance.highScore = GameManager.instance.score;
             GameManager.instance.ReportScore(GameManager.instance.score);
 
+            GameManager.instance.SaveData();
             
         }
         else {

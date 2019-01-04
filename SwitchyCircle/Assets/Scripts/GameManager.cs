@@ -348,13 +348,6 @@ public class GameManager : MonoBehaviour {
 
         }
 
-        if (score > highScore)
-        {
-
-            highScore = score;
-
-        }
-
     }
 
     public void Revive()
