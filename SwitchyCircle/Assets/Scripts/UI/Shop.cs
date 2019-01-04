@@ -2,14 +2,22 @@
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Advertisements;
 
 public class Shop : MonoBehaviour {
+
+    public GameObject watchAd;
 
     [SerializeField] private ShopItem        itemPrefab;
     [SerializeField] private Transform       listContent;
     [SerializeField] private TextMeshProUGUI currentGems;
 
     private List<ShopItem>  listItems;
+
+    public TextMeshProUGUI rewardText;
+
+    public GameObject explosion;
+    public GameObject explosionPrefab;
 
     void OnEnable()
     {
@@ -32,6 +40,8 @@ public class Shop : MonoBehaviour {
             listItems[i].Setup(i);
         }
 
+        watchAd.SetActive(GameManager.instance.IsAdReady());
+
     }
 
     void Update () {
@@ -40,11 +50,59 @@ public class Shop : MonoBehaviour {
 
         if (Input.GetKeyDown("escape"))
         {
-            
-            GameManager.instance.MainMenu();
+
+            if (GameManager.instance.gameState != GameManager.GameState.DailyGift) {
+
+                GameManager.instance.MainMenu();
+                
+            }
+
+        }
+
+        if (GameManager.instance.gameState == GameManager.GameState.DailyGift)
+        {
+
+            if (Input.GetMouseButtonDown(0))
+            {
+
+                GameManager.instance.ChangeGameState(GameManager.GameState.Shop);
+
+            }
+
+            if (Input.GetKeyDown("escape"))
+            {
+
+                GameManager.instance.ChangeGameState(GameManager.GameState.Shop);
+
+            }
 
         }
 
     }
-    
+
+    public void WatchAd() {
+
+        ShowOptions so = new ShowOptions();
+        so.resultCallback = AdReward;
+
+        GameManager.instance.DisplayAd("rewardedVideo", so);
+
+    }
+
+    public void AdReward(ShowResult sr)
+    {
+
+        if (sr == ShowResult.Finished)
+        {
+
+            rewardText.text = "+30";
+
+            GameManager.instance.GetDailyGift(30);
+
+            explosion = Instantiate(explosionPrefab);
+
+        }
+
+    }
+
 }

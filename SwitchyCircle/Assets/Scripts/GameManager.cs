@@ -132,7 +132,16 @@ public class GameManager : MonoBehaviour {
 
             if (Random.Range(1, 3) == 1) {
 
-                gems += 1;
+                switch (Random.Range(1, 5)) {
+
+                    case 2:
+                        gems += 2;
+                        break;
+                    default:
+                        gems += 1;
+                        break;
+
+                }
 
             }
 
@@ -164,6 +173,8 @@ public class GameManager : MonoBehaviour {
             case GameState.GameOver:
 
                 gameOverUI.SetActive(newGameState == GameState.GameOver);
+                dailyGiftUI.SetActive(newGameState == GameState.DailyGift);
+
 
                 break;
             case GameState.DailyGift:

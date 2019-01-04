@@ -1,5 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.Advertisements;
+using TMPro;
 
 public class GameOver : MonoBehaviour {
 
@@ -12,6 +14,8 @@ public class GameOver : MonoBehaviour {
 
     public int timesToAd = 3;
     public int timesToRevive = 5;
+
+    
 
     void OnEnable()
     {
@@ -74,12 +78,36 @@ public class GameOver : MonoBehaviour {
             if (gameOverPanel.activeSelf)
             {
 
-                GameManager.instance.MainMenu();
+                if (GameManager.instance.gameState != GameManager.GameState.DailyGift)
+                {
+
+                    GameManager.instance.MainMenu();
+
+                }
 
             }
             else if(revivePanel.activeSelf){
 
                 NoThanks();
+
+            }
+
+        }
+
+        if (GameManager.instance.gameState == GameManager.GameState.DailyGift)
+        {
+
+            if (Input.GetMouseButtonDown(0))
+            {
+
+                GameManager.instance.ChangeGameState(GameManager.GameState.GameOver);
+
+            }
+
+            if (Input.GetKeyDown("escape"))
+            {
+
+                GameManager.instance.ChangeGameState(GameManager.GameState.GameOver);
 
             }
 
@@ -175,6 +203,33 @@ public class GameOver : MonoBehaviour {
 
         timesToRevive = 5;
         
+    }
+
+    #endregion
+
+    #region Show Ad
+
+    public void WatchAd()
+    {
+
+        ShowOptions so = new ShowOptions();
+        so.resultCallback = AdReward;
+
+        GameManager.instance.DisplayAd("rewardedVideo", so);
+
+    }
+
+    public void AdReward(ShowResult sr)
+    {
+
+        if (sr == ShowResult.Finished)
+        {
+
+            timesToAd = 3;
+            gameOverController.AdReward();
+            
+        }
+
     }
 
     #endregion

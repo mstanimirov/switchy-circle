@@ -4,9 +4,11 @@ using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
 using EasyMobile;
+using UnityEngine.Advertisements;
 
 public class GameOverPanel : MonoBehaviour {
 
+    public GameObject watchAd;
     public GameObject shopButton;
     public GameObject restartButton;
     public GameObject facebookButton;
@@ -20,6 +22,11 @@ public class GameOverPanel : MonoBehaviour {
     public List<Color> colors = new List<Color>();
 
     private Texture2D shareTexture;
+
+    public TextMeshProUGUI rewardText;
+
+    public GameObject explosion;
+    public GameObject explosionPrefab;
 
     void OnEnable()
     {
@@ -59,6 +66,10 @@ public class GameOverPanel : MonoBehaviour {
 
         yield return new WaitForSeconds(0.1f);
 
+        watchAd.SetActive(GameManager.instance.IsAdReady());
+        
+        yield return new WaitForSeconds(0.1f);
+
         shopButton.SetActive(true);
 
         yield return new WaitForSeconds(0.1f);
@@ -75,6 +86,7 @@ public class GameOverPanel : MonoBehaviour {
     public void SetGameOver(bool state)
     {
 
+        watchAd.SetActive(state);
         scorePanel.SetActive(state);
         shopButton.SetActive(state);
         restartButton.SetActive(state);
@@ -102,5 +114,22 @@ public class GameOverPanel : MonoBehaviour {
         Sharing.ShareTexture2D(shareTexture, "screenshot", "Check out my new score on Switchy Circle! Can you beat me? https://play.google.com/store/apps/details?id=com.stanimirov.switchycircle");
 
     }
+
+    #region Show Reward
+
+    public void AdReward()
+    {
+
+        watchAd.SetActive(false);
+
+        rewardText.text = "+30";
+
+        GameManager.instance.GetDailyGift(30);
+
+        explosion = Instantiate(explosionPrefab);
+
+    }
+
+    #endregion
 
 }
