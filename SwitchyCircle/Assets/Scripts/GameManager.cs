@@ -86,9 +86,11 @@ public class GameManager : MonoBehaviour {
             Advertisement.Initialize("2962040");
 
             //Google play services
+#if UNITY_ANDROID
             PlayGamesPlatform.Activate();
+            
             OnConnect();
-
+#endif
             return;
 
         }
@@ -152,7 +154,7 @@ public class GameManager : MonoBehaviour {
 
 	}
 
-    #endregion
+#endregion
 
     public void RequestRevive()
     {
@@ -199,7 +201,7 @@ public class GameManager : MonoBehaviour {
 
     }
 
-    #region DailyGift
+#region DailyGift
 
     public void GetDailyGift(int reward)
     {
@@ -211,9 +213,9 @@ public class GameManager : MonoBehaviour {
 
     }
 
-    #endregion
+#endregion
 
-    #region Ad Managment
+#region Ad Managment
 
     public void DisplayAd(string type) {
 
@@ -234,22 +236,24 @@ public class GameManager : MonoBehaviour {
 
     }
 
-    #endregion
+#endregion
 
-    #region Play services
+#region Play services
 
     public void OnConnect() {
 
+        #if UNITY_ANDROID
         Social.localUser.Authenticate((bool success) => {
 
             OnConnectionResponse(success);
 
         });
-
+        #endif
     }
 
     public void OnConnectionResponse(bool authenticated) {
 
+        #if UNITY_ANDROID
         if (authenticated)
         {
 
@@ -261,11 +265,12 @@ public class GameManager : MonoBehaviour {
             Debug.Log("Failed");
 
         }
-
+        #endif
     }
 
     public void ShowLeaderboard() {
 
+        #if UNITY_ANDROID
         if (Social.localUser.authenticated)
         {
 
@@ -277,12 +282,13 @@ public class GameManager : MonoBehaviour {
             OnConnect();
 
         }
-
+        #endif
     }
 
     public void ShowAchievements()
     {
 
+        #if UNITY_ANDROID
         if (Social.localUser.authenticated)
         {
 
@@ -295,33 +301,34 @@ public class GameManager : MonoBehaviour {
             OnConnect();
 
         }
-
+        #endif
     }
 
     public void UnlockAchievement(string achievementID) {
 
+        #if UNITY_ANDROID
         Social.ReportProgress(achievementID, 100.0f, (bool success) => {
 
             Debug.Log("Unlocked achievment -> " + success.ToString());
 
         });
-
+        #endif
     }
 
     public void ReportScore(int score)
     {
-
+        #if UNITY_ANDROID
         Social.ReportScore(score, SCGPS.leaderboard_highscore, (bool success) => {
 
             Debug.Log("Reported score to leaderboard -> " + success.ToString());
 
         });
-
+#endif
     }
 
-    #endregion
+#endregion
 
-    #region GamePlay
+#region GamePlay
 
     public void ResetGame()
     {
@@ -386,9 +393,9 @@ public class GameManager : MonoBehaviour {
 
     }
 
-    #endregion
+#endregion
 
-    #region Hand Managment
+#region Hand Managment
 
     private void CreateHand() {
 
@@ -459,9 +466,9 @@ public class GameManager : MonoBehaviour {
 
     }
 
-    #endregion
+#endregion
 
-    #region Button Functions
+#region Button Functions
 
     public void MainMenu() {
 
@@ -559,17 +566,17 @@ public class GameManager : MonoBehaviour {
 
     public void RateUs() {
 
-        #if UNITY_EDITOR
+#if UNITY_EDITOR
         Debug.Log("Opening store...");
-        #elif UNITY_ANDROID
+#elif UNITY_ANDROID
         Application.OpenURL(ANDROID_RATE_URL);
-        #endif
+#endif
 
     }
 
-    #endregion
+#endregion
 
-    #region Save System
+#region Save System
 
     public void SaveData() {
 
@@ -628,6 +635,6 @@ public class GameManager : MonoBehaviour {
 
     }
 
-    #endregion
+#endregion
         
 }
