@@ -15,9 +15,12 @@ public class Shop : MonoBehaviour {
     private List<ShopItem>  listItems;
 
     public TextMeshProUGUI rewardText;
+    public TextMeshProUGUI rewardValue;
 
     public GameObject explosion;
     public GameObject explosionPrefab;
+
+    private int reward;
 
     void OnEnable()
     {
@@ -39,6 +42,9 @@ public class Shop : MonoBehaviour {
         {
             listItems[i].Setup(i);
         }
+
+        reward = CalculateReward();
+        rewardValue.text = "+" + reward;
 
         watchAd.SetActive(GameManager.instance.IsAdReady());
 
@@ -95,13 +101,23 @@ public class Shop : MonoBehaviour {
         if (sr == ShowResult.Finished)
         {
 
-            rewardText.text = "+30";
+            rewardText.text = "+" + reward;
 
-            GameManager.instance.GetDailyGift(30);
+            GameManager.instance.GetDailyGift(reward);
 
             explosion = Instantiate(explosionPrefab);
 
         }
+
+    }
+
+    public int CalculateReward()
+    {
+
+        int amount = GameManager.instance.gems % 10;
+        amount = 10 - amount;
+
+        return amount + 30;
 
     }
 
