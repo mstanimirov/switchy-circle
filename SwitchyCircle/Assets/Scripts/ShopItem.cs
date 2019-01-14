@@ -14,6 +14,9 @@ public class ShopItem : MonoBehaviour {
     [SerializeField] private Color normalColor   = Color.white;
     [SerializeField] private Color selectedColor = Color.white;
 
+    [SerializeField] private Color lockedColor = Color.white;
+    [SerializeField] private Color unlockedColor = Color.white;
+
     [SerializeField] private Image iconImage;
     [SerializeField] private Image backgroundImage;
 
@@ -34,8 +37,10 @@ public class ShopItem : MonoBehaviour {
         price.text = handInfo.price.ToString();
         iconImage.sprite = handInfo.handSkin;
 
+        iconImage.color = handInfo.isLocked ? lockedColor : unlockedColor;
+
         locked.SetActive(handInfo.isLocked);
-        unlocked.SetActive(!handInfo.isLocked);
+        unlocked.transform.localPosition = handInfo.isLocked ? new Vector3(0.0f, 15.0f, 0.0f) : Vector3.zero;
 
     }
 
@@ -55,8 +60,10 @@ public class ShopItem : MonoBehaviour {
 
                 handInfo.isLocked = false;
 
+                iconImage.color = handInfo.isLocked ? lockedColor : unlockedColor;
+                
                 locked.SetActive(handInfo.isLocked);
-                unlocked.SetActive(!handInfo.isLocked);
+                unlocked.transform.localPosition = Vector3.zero;
 
                 PlayerData data = SaveSystem.LoadData();
 

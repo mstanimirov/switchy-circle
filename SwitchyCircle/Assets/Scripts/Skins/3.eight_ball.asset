@@ -9,12 +9,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 41f15682504bd704e9cf592d7b7ac0e8, type: 3}
-  m_Name: default
+  m_Name: 3.eight_ball
   m_EditorClassIdentifier: 
-  handSkin: {fileID: 21300000, guid: 95fffed790996494eb4c4b0d268ab909, type: 3}
+  handSkin: {fileID: 21300000, guid: 3ab2049de3f939f41897230a69a8eb8f, type: 3}
   explosion_red: {fileID: 1911807131118930, guid: 03df833edfa6c1c4dbc049ca2fda571c,
     type: 2}
   explosion_blue: {fileID: 1967686073156468, guid: 1ad88356a5efef3488bca0cf1ff78dda,
     type: 2}
-  price: 0
-  isLocked: 0
+  price: 250
+  isLocked: 1

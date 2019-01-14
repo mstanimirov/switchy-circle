@@ -12,10 +12,19 @@ public class GameOver : MonoBehaviour {
     private Continue reviveController;
     private GameOverPanel gameOverController;
 
-    public int timesToAd = 3;
-    public int timesToRevive = 5;
+    private int timesToAd = 6;
+    private int timesToRevive = 1;
 
-    
+    public int setTimesToAd = 6;
+    public int setTimesToRevive = 1;
+
+    void Awake()
+    {
+
+        timesToAd = setTimesToAd;
+        timesToRevive = setTimesToRevive;
+
+    }
 
     void OnEnable()
     {
@@ -35,7 +44,7 @@ public class GameOver : MonoBehaviour {
 
         timesToRevive -= 1;
 
-        if (timesToRevive < 0 && GameManager.instance.score >= 10 && GameManager.instance.IsAdReady())
+        if (timesToRevive < 0 && GameManager.instance.score >= 5 && GameManager.instance.IsAdReady())
         {
 
             StartCoroutine("ShowRevive");
@@ -123,7 +132,7 @@ public class GameOver : MonoBehaviour {
         {
 
             GameManager.instance.DisplayAd("video");
-            timesToAd = 3;
+            timesToAd = setTimesToAd;
 
         }
 
@@ -184,8 +193,8 @@ public class GameOver : MonoBehaviour {
             
         }
 
-        timesToAd = 3;
-        timesToRevive = 5;
+        timesToAd = setTimesToAd;
+        timesToRevive = setTimesToRevive;
 
         NoThanks();
 
@@ -201,7 +210,7 @@ public class GameOver : MonoBehaviour {
 
         reviveController.Close();
 
-        timesToRevive = 5;
+        timesToRevive = setTimesToRevive;
         
     }
 
@@ -225,7 +234,7 @@ public class GameOver : MonoBehaviour {
         if (sr == ShowResult.Finished)
         {
 
-            timesToAd = 3;
+            timesToAd = setTimesToAd;
             gameOverController.AdReward();
             
         }

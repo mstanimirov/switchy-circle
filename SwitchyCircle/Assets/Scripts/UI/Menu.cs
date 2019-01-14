@@ -143,7 +143,7 @@ public class Menu : MonoBehaviour {
 
         if (secondsLeft < 0) {
 
-            timeText.text = "Ready!";
+            timeText.text = "Free Gift";
             return true;
 
         }

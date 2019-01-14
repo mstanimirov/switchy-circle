@@ -24,15 +24,20 @@ public class GameOverPanel : MonoBehaviour {
     private Texture2D shareTexture;
 
     public TextMeshProUGUI rewardText;
+    public TextMeshProUGUI rewardValue;
 
     public GameObject explosion;
     public GameObject explosionPrefab;
+
+    private int reward;
 
     void OnEnable()
     {
 
         Image scoreImage = scorePanel.GetComponent<Image>();
         scoreImage.color = colors[GameManager.instance.handColorIndex];
+
+        reward = CalculateReward();
 
         StartCoroutine("ShowButtons");
 
@@ -66,6 +71,7 @@ public class GameOverPanel : MonoBehaviour {
 
         yield return new WaitForSeconds(0.1f);
 
+        rewardValue.text = "+" + reward;
         watchAd.SetActive(GameManager.instance.IsAdReady());
         
         yield return new WaitForSeconds(0.1f);
@@ -122,11 +128,20 @@ public class GameOverPanel : MonoBehaviour {
 
         watchAd.SetActive(false);
 
-        rewardText.text = "+30";
+        rewardText.text = "+" + reward;
 
-        GameManager.instance.GetDailyGift(30);
+        GameManager.instance.GetDailyGift(reward);
 
         explosion = Instantiate(explosionPrefab);
+
+    }
+
+    public int CalculateReward() {
+
+        int amount = GameManager.instance.gems % 10;
+        amount = 10 - amount;
+
+        return amount + 30;
 
     }
 
