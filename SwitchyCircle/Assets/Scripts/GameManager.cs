@@ -329,7 +329,7 @@ public class GameManager : MonoBehaviour {
         score = 0;
         messageState = 1;
 
-        handSpeed = 200;
+        handSpeed = 150;
         handDirection = -1;
 
     }

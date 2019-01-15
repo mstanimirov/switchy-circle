@@ -115,7 +115,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c03cf17ab9aafa6488065a6a1d9b8daa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 200
+  speed: 150
   direction: -1
   sprite: {fileID: 212469599363004508}
   skin: {fileID: 0}
